@@ -7,17 +7,17 @@ const mappers = require("./mappers");
 const addProject = async project => {
   try {
     const newProject = await db.insert(project).into("projects");
-    console.log(newProject);
     return newProject;
   } catch (e) {
-    console.log(e);
     return e;
   }
 };
 
 const addAction = async action => {
+  console.log(action)
   try {
     const newAction = await db.insert(action).into("actions");
+    console.log(newAction)
     return newAction;
   } catch (e) {
     return e;

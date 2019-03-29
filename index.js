@@ -5,6 +5,7 @@ const app = express();
 const { actionRoutes, projectRoutes, errorHandler } = require('./routes');
 
 app.use(helmet());
+app.use(express.json());
 
 app.use(projectRoutes);
 app.use(actionRoutes);
