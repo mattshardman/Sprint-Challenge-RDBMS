@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "project-table": "knex migrate:make createProjectTable",
-    "actions-table": "knex migrate:make createActionTable"
+    "run-migrations": "knex migrate:make createProjectTable && knex migrate:make createActionTable",
+    "latest": "knex migrate:latest",
+    "seed-projects": "knex seed:make 01-projects",
+    "seed-actions": "knex seed:make 02-actions",
+    "run-seeds": "knex seed:run 01-projects && knex seed:run 02-actions",
+    "rollback": "knex migrate:rollback"
   },
   "repository": {
     "type": "git",

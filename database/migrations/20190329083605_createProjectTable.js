@@ -8,11 +8,9 @@ exports.up = (knex, Promise) => {
         tbl
           .string('description', 255)
           .notNullable()
-          .unique('uq_projects_description');
         tbl
-          .string('boolean')
+          .boolean('completed')
           .notNullable()
-          .unique('uq_projects_completed');
         tbl.timestamp('createdAt').defaultTo(knex.fn.now());
       });
 };

@@ -4,15 +4,12 @@ exports.up = (knex, Promise) => {
         tbl
           .string('description', 255)
           .notNullable()
-          .unique('uq_actions_description');
         tbl
           .string('notes', 255)
           .notNullable()
-          .unique('uq_actions_notes');
         tbl
-          .string('boolean')
+          .boolean('completed')
           .notNullable()
-          .unique('uq_actions_completed');
         tbl
           .integer('project_id')
           .unsigned()
