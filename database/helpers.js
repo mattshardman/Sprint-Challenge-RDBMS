@@ -13,6 +13,15 @@ const addProject = async project => {
   }
 };
 
+const addAction = async action => {
+    try {
+      const newAction = await db.insert(action).into("actions");
+      return newAction;
+    } catch (e) {
+      return e;
+    }
+  };
+
 const getProjects = async () => {
     try {
         const projects = await db("projects");
@@ -21,6 +30,8 @@ const getProjects = async () => {
         return e;
     }
 }
+
+addAction({ description: "do something", completed: false, notes: "", project_id: 1 });
 
 module.exports = {
     addProject,
