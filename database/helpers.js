@@ -13,6 +13,15 @@ const addProject = async project => {
   }
 };
 
+const getProjects = async () => {
+    try {
+        const projects = await db("projects");
+        return projects;
+    } catch (e) {
+        return e;
+    }
+}
+
 module.exports = {
     addProject,
 }
