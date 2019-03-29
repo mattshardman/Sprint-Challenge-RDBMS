@@ -2,13 +2,14 @@ const express = require('express');
 const helmet = require('helmet');
 const app = express();
 
-const { actionRoutes, projectRoutes, errorHandler } = require('./routes');
+const { actionRoutes, projectRoutes, contextRoutes, errorHandler } = require('./routes');
 
 app.use(helmet());
 app.use(express.json());
 
 app.use(projectRoutes);
 app.use(actionRoutes);
+app.use(contextRoutes);
 
 app.use(errorHandler);
 

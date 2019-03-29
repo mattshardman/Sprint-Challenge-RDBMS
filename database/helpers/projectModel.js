@@ -34,7 +34,7 @@ const getProject = async id => {
         }
       )
       .innerJoin("actions", "p.id", "actions.project_id")
-      .then(result => mappers.reformattedProject(result));
+      .then(mappers.reformattedProject);
     return project;
   } catch (e) {
     return e;
