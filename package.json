@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "run-migrations": "knex migrate:make createProjectTable && knex migrate:make createActionTable",
+    "run-context-migration": "knex migrate:make createContextsTable && knex migrate:make createActionContextTable",
     "latest": "knex migrate:latest",
     "seed-projects": "knex seed:make 01-projects",
     "seed-actions": "knex seed:make 02-actions",
