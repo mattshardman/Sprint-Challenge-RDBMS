@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run-migrations": "knex migrate:make createProjectTable && knex migrate:make createActionTable",
-    "run-context-migration": "knex migrate:make createContextsTable && knex migrate:make createActionContextTable",
+    "run-migrations": "knex migrate:make createProjectTable && knex migrate:make createActionTable && knex migrate:make createContextsTable && knex migrate:make createActionContextTable",
     "latest": "knex migrate:latest",
     "seed-projects": "knex seed:make 01-projects",
     "seed-actions": "knex seed:make 02-actions",
@@ -28,7 +27,6 @@
     "express": "^4.16.4",
     "helmet": "^3.16.0",
     "knex": "^0.16.3",
-    "mattspress": "^2.4.3",
     "sqlite3": "^4.0.6"
   }
 }

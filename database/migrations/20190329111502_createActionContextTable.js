@@ -4,11 +4,9 @@ exports.up = (knex, Promise) => {
         tbl
           .integer('action_id')
           .notNullable()
-          .unique('uq_action_id');
         tbl
           .integer('context_id')
           .notNullable()
-          .unique('uq_context_id');
         tbl.timestamp('createdAt').defaultTo(knex.fn.now());
       });
 };

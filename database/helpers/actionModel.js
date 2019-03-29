@@ -7,12 +7,18 @@ const mappers = require("./mappers");
 const getAction = async id => {
   try {
     const action = await db("actions")
-      .where({ id });
+      .where("actions.id", id)
+      .select("actions.id", "actions.description", { context: "contexts.name" })
+      .innerJoin("action-context", "actions.id", "action-context.action_id")
+      .innerJoin("contexts", "action-context.context_id", "contexts.id")
+      .then(mappers.reformatAction);
     return action;
   } catch (e) {
     return e;
   }
 };
+
+getAction(6);
 
 const getActions = async () => {
   try {
@@ -27,11 +33,11 @@ const addAction = async action => {
   const { contexts, ...actionToAdd } = action; 
   try {
     const newActionId = await db.insert(actionToAdd).into("actions");
-    const newContexts = await db.insert({ action_id: newActionId, context_id: contexts[0] }).into("action-contexts");
-    console.log(newContexts)
+    contexts.forEach(async context => {
+      await db.insert({ action_id: newActionId[0], context_id: context }).into("action-context");
+    })
     return newActionId;
   } catch (e) {
-    console.log(e)
     return e;
   }
 };
