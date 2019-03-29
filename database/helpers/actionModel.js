@@ -20,7 +20,7 @@ const updateAction = async (id, changes) => {
       const updatedAction = await db("actions")
         .where({ id })
         .update(changes)
-        .then(id => db('actions').where({ id }));
+        .then(() => db('actions').where({ id }));
       return updatedAction;
     } catch (e) {
       return e;
