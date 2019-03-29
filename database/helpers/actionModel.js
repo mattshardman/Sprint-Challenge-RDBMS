@@ -1,0 +1,20 @@
+const knex = require("knex");
+const knexConfig = require("../../knexfile.js");
+const db = knex(knexConfig.development);
+
+const mappers = require("./mappers");
+
+const addAction = async action => {
+  console.log(action);
+  try {
+    const newAction = await db.insert(action).into("actions");
+    console.log(newAction);
+    return newAction;
+  } catch (e) {
+    return e;
+  }
+};
+
+module.exports = {
+  addAction,
+};

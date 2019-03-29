@@ -2,7 +2,7 @@ const express = require("express");
 
 const routes = express.Router();
 
-const helpers = require('../database/helpers');
+const helpers = require('../database/helpers/actionModel');
 
 routes.post('/api/action', async (req, res, next) => {
     const action = req.body;

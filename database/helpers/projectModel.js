@@ -1,5 +1,5 @@
 const knex = require("knex");
-const knexConfig = require("../knexfile.js");
+const knexConfig = require("../../knexfile.js");
 const db = knex(knexConfig.development);
 
 const mappers = require("./mappers");
@@ -8,17 +8,6 @@ const addProject = async project => {
   try {
     const newProject = await db.insert(project).into("projects");
     return newProject;
-  } catch (e) {
-    return e;
-  }
-};
-
-const addAction = async action => {
-  console.log(action)
-  try {
-    const newAction = await db.insert(action).into("actions");
-    console.log(newAction)
-    return newAction;
   } catch (e) {
     return e;
   }
@@ -52,8 +41,35 @@ const getProject = async id => {
   }
 };
 
+const getProjects = async () => {
+  try {
+    const projects = await db({ p: "projects" }).select(
+      "p.id",
+      "p.name",
+      "p.description",
+      "p.completed"
+    );
+    return projects;
+  } catch (e) {
+    return e;
+  }
+};
+
+const updateProject = async (id, changes) => {
+  try {
+    const updatedProject = await db("projects")
+      .where({ id })
+      .update(changes)
+      .then(id => db('projects').where({ id }));
+    return updatedProject;
+  } catch (e) {
+    return e;
+  }
+};
+
 module.exports = {
   addProject,
-  addAction,
   getProject,
+  getProjects,
+  updateProject
 };
