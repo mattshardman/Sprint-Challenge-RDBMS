@@ -47,4 +47,15 @@ routes.put('/api/project/:id', async (req, res, next) => {
     }
 });
 
+routes.delete('/api/project/:id', async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        await helpers.deleteProject(id);
+        res.status(200);
+        res.send(`Project ${id} deleted`);
+    } catch (e) {
+        next({ status: 500, message: e });
+    }
+})
+
 module.exports = routes;

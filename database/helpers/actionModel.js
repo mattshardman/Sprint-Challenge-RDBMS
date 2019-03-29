@@ -27,7 +27,16 @@ const updateAction = async (id, changes) => {
     }
   };
 
+const deleteAction = async (id) => {
+    try {
+        db("actions").where({ id }).del();
+    } catch (e) {
+        next({ status: 500, message: e });
+    }
+}
+
 module.exports = {
   addAction,
-  updateAction
+  updateAction,
+  deleteAction
 };

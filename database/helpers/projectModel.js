@@ -67,9 +67,19 @@ const updateProject = async (id, changes) => {
   }
 };
 
+const deleteProject = async (id) => {
+    try {
+        await db("projects").where({ id }).del();
+        return true;
+    } catch (e) {
+        next({ status: 500, message: e });
+    }
+}
+
 module.exports = {
   addProject,
   getProject,
   getProjects,
-  updateProject
+  updateProject,
+  deleteProject
 };

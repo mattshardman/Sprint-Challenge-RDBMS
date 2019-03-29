@@ -27,4 +27,15 @@ routes.put('/api/action/:id', async (req, res, next) => {
     }
 });
 
+routes.delete('/api/project/:id', async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        await helpers.deleteAction(id);
+        res.status(200);
+        res.send(`Action ${id} deleted`);
+    } catch (e) {
+        next({ status: 500, message: e });
+    }
+})
+
 module.exports = routes;
