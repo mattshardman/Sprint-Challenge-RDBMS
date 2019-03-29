@@ -2,7 +2,7 @@ const knex = require("knex");
 const knexConfig = require("../knexfile.js");
 const db = knex(knexConfig.development);
 
-const mappers = require('./mappers');
+const mappers = require("./mappers");
 
 const addProject = async project => {
   try {
@@ -24,7 +24,7 @@ const addAction = async action => {
   }
 };
 
-const getProjects = async id => {
+const getProject = async id => {
   try {
     const project = await db({ p: "projects" })
       .where("p.id", id)
@@ -46,16 +46,14 @@ const getProjects = async id => {
       )
       .innerJoin("actions", "p.id", "actions.project_id")
       .then(result => mappers.reformattedProject(result));
-   console.log(project)
     return project;
   } catch (e) {
-    console.log(e);
     return e;
   }
 };
 
-getProjects(1);
-
 module.exports = {
-  addProject
+  addProject,
+  addAction,
+  getProject,
 };
