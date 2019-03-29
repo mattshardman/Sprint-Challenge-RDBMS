@@ -4,13 +4,34 @@ const db = knex(knexConfig.development);
 
 const mappers = require("./mappers");
 
-const addAction = async action => {
-  console.log(action);
+const getAction = async id => {
   try {
-    const newAction = await db.insert(action).into("actions");
-    console.log(newAction);
-    return newAction;
+    const action = await db("actions")
+      .where({ id });
+    return action;
   } catch (e) {
+    return e;
+  }
+};
+
+const getActions = async () => {
+  try {
+    const actions = await db("actions");
+    return actions;
+  } catch (e) {
+    return e;
+  }
+};
+
+const addAction = async action => {
+  const { contexts, ...actionToAdd } = action; 
+  try {
+    const newActionId = await db.insert(actionToAdd).into("actions");
+    const newContexts = await db.insert({ action_id: newActionId, context_id: contexts[0] }).into("action-contexts");
+    console.log(newContexts)
+    return newActionId;
+  } catch (e) {
+    console.log(e)
     return e;
   }
 };
@@ -36,6 +57,8 @@ const deleteAction = async (id) => {
 }
 
 module.exports = {
+  getAction,
+  getActions,
   addAction,
   updateAction,
   deleteAction

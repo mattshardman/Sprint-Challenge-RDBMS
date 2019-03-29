@@ -14,7 +14,7 @@ routes.post('/api/project', async (req, res, next) => {
     }
 });
 
-routes.get('/api/projects', async (req, res) => {
+routes.get('/api/projects', async (req, res, next) => {
     try {
         const projects = await helpers.getProjects();
         res.status(200);
@@ -24,7 +24,7 @@ routes.get('/api/projects', async (req, res) => {
     }
 });
 
-routes.get('/api/project/:id', async (req,res) => {
+routes.get('/api/project/:id', async (req,res, next) => {
     const { id } = req.params;
     try {
         const project = await helpers.getProject(id);

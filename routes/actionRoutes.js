@@ -4,6 +4,27 @@ const routes = express.Router();
 
 const helpers = require('../database/helpers/actionModel');
 
+routes.get('/api/actions', async (req, res, next) => {
+    try {
+        const actions = await helpers.getActions();
+        res.status(200);
+        res.json(actions);
+    } catch (e) {
+        next({ status: 500, message: e });
+    }
+});
+
+routes.get('/api/action/:id', async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const action = await helpers.getAction(id);
+        res.status(200);
+        res.json(action);
+    } catch (e) {
+        next({ status: 500, message: e });
+    }
+});
+
 routes.post('/api/action', async (req, res, next) => {
     const action = req.body;
     try {
