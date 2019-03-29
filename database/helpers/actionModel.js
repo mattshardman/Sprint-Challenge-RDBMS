@@ -15,6 +15,19 @@ const addAction = async action => {
   }
 };
 
+const updateAction = async (id, changes) => {
+    try {
+      const updatedAction = await db("actions")
+        .where({ id })
+        .update(changes)
+        .then(id => db('actions').where({ id }));
+      return updatedAction;
+    } catch (e) {
+      return e;
+    }
+  };
+
 module.exports = {
   addAction,
+  updateAction
 };

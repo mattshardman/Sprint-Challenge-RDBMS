@@ -15,4 +15,16 @@ routes.post('/api/action', async (req, res, next) => {
     }
 });
 
+routes.put('/api/action/:id', async (req, res, next) => {
+    const { id } = req.params;
+    const action = req.body;
+    try {
+        const updatedAction = await helpers.updateAction(id, action);
+        res.status(201);
+        res.json(updatedAction);
+    } catch (e) {
+        next({ status: 501, message: e });
+    }
+});
+
 module.exports = routes;
